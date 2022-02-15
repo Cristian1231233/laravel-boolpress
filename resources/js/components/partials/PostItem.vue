@@ -1,6 +1,10 @@
 <template>
   <article>
-      <h1><a href="#">{{post.title}}</a></h1>
+      
+      <h1>
+          <router-link :to="{name: 'detail', params:{slug: post.slug}}" >{{post.title}}</router-link>
+      </h1>
+      
       <div v-if="post.category">{{ post.category.name }}</div>
       <div class="category">  
         <span v-for="tag in post.tags"
