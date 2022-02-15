@@ -2108,7 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      apiUlr: 'http://127.0.0.1:8000/api/posts?page=',
+      apiUlr: 'http://127.0.0.1:8000/api/posts',
       posts: null,
       pagination: {},
       tags: [],
@@ -2126,7 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.posts = null;
-      axios.get(this.apiUlr + page).then(function (res) {
+      axios.get(this.apiUlr + '?page=' + page).then(function (res) {
         _this.posts = res.data.posts.data;
         _this.categories = res.data.categories;
         _this.tags = res.data.tags;
@@ -2137,11 +2137,9 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.pagination);
       });
     },
-    getPostCategory: function getPostCategory($slug_category) {
-      var _this2 = this;
-
-      axios.get(this.apiUrl + 'postcategory/' + slug_category).then(function (res) {
-        _this2.posts = res.data.category.posts;
+    getPostCategory: function getPostCategory(slug_category) {
+      axios.get(this.apiUrl + '/postcategory/' + slug_category).then(function (res) {
+        console.log(res.data);
       });
     }
   }
@@ -4048,6 +4046,7 @@ var render = function () {
         _vm._v(" "),
         _c("Sidebar", {
           attrs: { tags: _vm.tags, categories: _vm.categories },
+          on: { getPostCategory: _vm.getPostCategory },
         }),
       ],
       1
@@ -4252,8 +4251,8 @@ var render = function () {
       _c(
         "div",
         { staticClass: "tag" },
-        _vm._l(_vm.tags, function (tag) {
-          return _c("span", { key: "tag" + tag.id }, [_vm._v(_vm._s(tag.name))])
+        _vm._l(_vm.tags, function (tag, index) {
+          return _c("span", { key: index }, [_vm._v(_vm._s(tag.name))])
         }),
         0
       ),

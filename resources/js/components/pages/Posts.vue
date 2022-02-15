@@ -35,7 +35,7 @@
         <Sidebar 
         :tags ="tags"
         :categories="categories"
-        
+        @getPostCategory="getPostCategory"
         /> 
 
     </div>
@@ -55,7 +55,7 @@ export default {
     },
     data(){
         return{
-            apiUlr: 'http://127.0.0.1:8000/api/posts?page=',
+            apiUlr: 'http://127.0.0.1:8000/api/posts',
             posts: null,
             pagination: {},
             tags:[],
@@ -70,7 +70,7 @@ export default {
     methods: {
         getPosts(page = 1){
             this.posts = null;
-            axios.get(this.apiUlr + page)
+            axios.get(this.apiUlr + '?page=' + page)
             .then(res => {
                 this.posts = res.data.posts.data;
                 this.categories = res.data.categories;
@@ -82,10 +82,10 @@ export default {
                 console.log(this.pagination);
             })
         },
-        getPostCategory($slug_category){
-            axios.get(this.apiUrl + 'postcategory/' + slug_category)
+        getPostCategory(slug_category){
+            axios.get(this.apiUrl + '/postcategory/' + slug_category)
             .then(res => {
-                this.posts = res.data.category.posts;
+                console.log(res.data);
             })
         }
     }

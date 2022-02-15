@@ -14,8 +14,8 @@
           <h3>Tags</h3>
           <div class="tag">
               <span
-              v-for="tag in tags"
-              :key="`tag${tag.id}`"
+              v-for="(tag, index) in tags"
+              :key="index"
               >{{tag.name}}</span>
           </div>
       </div>

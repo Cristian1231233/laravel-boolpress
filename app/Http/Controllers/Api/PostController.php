@@ -16,7 +16,7 @@ class PostController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        return response()->json(compact('posts', '$categories', 'tags'));
+        return response()->json(compact('posts', 'categories', 'tags'));
     }
 
     public function show($slug){
