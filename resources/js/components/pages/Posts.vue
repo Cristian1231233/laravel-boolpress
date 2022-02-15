@@ -55,7 +55,7 @@ export default {
     },
     data(){
         return{
-            apiUlr: 'http://127.0.0.1:8000/api/posts',
+            apiUrl: 'http://127.0.0.1:8000/api/posts',
             posts: null,
             pagination: {},
             tags:[],
@@ -70,7 +70,7 @@ export default {
     methods: {
         getPosts(page = 1){
             this.posts = null;
-            axios.get(this.apiUlr + '?page=' + page)
+            axios.get(this.apiUrl + '?page=' + page)
             .then(res => {
                 this.posts = res.data.posts.data;
                 this.categories = res.data.categories;
@@ -83,9 +83,10 @@ export default {
             })
         },
         getPostCategory(slug_category){
+            console.log("categoria", slug_category);
             axios.get(this.apiUrl + '/postcategory/' + slug_category)
             .then(res => {
-                console.log(res.data);
+                this.posts = res.data.category.posts;
             })
         }
     }

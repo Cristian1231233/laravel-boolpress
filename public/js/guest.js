@@ -2108,7 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      apiUlr: 'http://127.0.0.1:8000/api/posts',
+      apiUrl: 'http://127.0.0.1:8000/api/posts',
       posts: null,
       pagination: {},
       tags: [],
@@ -2126,7 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.posts = null;
-      axios.get(this.apiUlr + '?page=' + page).then(function (res) {
+      axios.get(this.apiUrl + '?page=' + page).then(function (res) {
         _this.posts = res.data.posts.data;
         _this.categories = res.data.categories;
         _this.tags = res.data.tags;
@@ -2138,8 +2138,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getPostCategory: function getPostCategory(slug_category) {
+      var _this2 = this;
+
+      console.log("categoria", slug_category);
       axios.get(this.apiUrl + '/postcategory/' + slug_category).then(function (res) {
-        console.log(res.data);
+        _this2.posts = res.data.category.posts;
       });
     }
   }

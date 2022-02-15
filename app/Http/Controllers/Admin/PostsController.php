@@ -81,9 +81,9 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-
+        $tags =Tag::all();
         if($post){
-            return view('admin.posts.show', compact('post'));
+            return view('admin.posts.show', compact('post', 'tags'));
         }
         abort(404, 'Errore nella ricerca del post');
     }
@@ -98,8 +98,9 @@ class PostsController extends Controller
     {
         $categories = Category::all();
         $post = Post::find($id);
+        $tags = Tag::all();
         if($post){
-            return view('admin.posts.edit', compact('post', 'categories'));
+            return view('admin.posts.edit', compact('post', 'categories', 'tags'));
         }
         abort(404, 'Errore nella ricerca del post');
     }
