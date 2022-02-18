@@ -1,7 +1,9 @@
 <template>
 <main>
     <div class="container">
-        <div v-if="posts">
+        <div v-if="success" >
+
+            <div v-if="posts">
                 <h1>I miei post</h1>
             <PostItem 
             v-for="post in posts"
@@ -30,6 +32,11 @@
         </div>
         <div v-else>
                 Caricamento...
+        </div>
+
+        </div>
+        <div v-else>
+            {{error}}
         </div>
       
         <Sidebar 

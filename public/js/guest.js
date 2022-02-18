@@ -2098,6 +2098,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3979,72 +3986,88 @@ var render = function () {
       "div",
       { staticClass: "container" },
       [
-        _vm.posts
-          ? _c(
-              "div",
-              [
-                _c("h1", [_vm._v("I miei post")]),
-                _vm._v(" "),
-                _vm._l(_vm.posts, function (post) {
-                  return _c("PostItem", { key: post.id, attrs: { post: post } })
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "pagination" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        attrs: { disabled: _vm.pagination.current === 1 },
-                        on: {
-                          click: function ($event) {
-                            return _vm.getPosts(_vm.pagination.current - 1)
-                          },
-                        },
-                      },
-                      [_vm._v("  << ")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.pagination.last, function (i) {
-                      return _c(
-                        "button",
-                        {
-                          key: i,
-                          attrs: { disabled: _vm.pagination.current === i },
-                          on: {
-                            click: function ($event) {
-                              return _vm.getPosts(i)
+        _vm.success
+          ? _c("div", [
+              _vm.posts
+                ? _c(
+                    "div",
+                    [
+                      _c("h1", [_vm._v("I miei post")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.posts, function (post) {
+                        return _c("PostItem", {
+                          key: post.id,
+                          attrs: { post: post },
+                        })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "pagination" },
+                        [
+                          _c(
+                            "button",
+                            {
+                              attrs: { disabled: _vm.pagination.current === 1 },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.getPosts(
+                                    _vm.pagination.current - 1
+                                  )
+                                },
+                              },
                             },
-                          },
-                        },
-                        [_vm._v(" " + _vm._s(i) + " ")]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        attrs: {
-                          disabled:
-                            _vm.pagination.current === _vm.pagination.last,
-                        },
-                        on: {
-                          click: function ($event) {
-                            return _vm.getPosts(_vm.pagination.current + 1)
-                          },
-                        },
-                      },
-                      [_vm._v(" >> ")]
-                    ),
-                  ],
-                  2
-                ),
-              ],
-              2
-            )
+                            [_vm._v("  << ")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.pagination.last, function (i) {
+                            return _c(
+                              "button",
+                              {
+                                key: i,
+                                attrs: {
+                                  disabled: _vm.pagination.current === i,
+                                },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.getPosts(i)
+                                  },
+                                },
+                              },
+                              [_vm._v(" " + _vm._s(i) + " ")]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              attrs: {
+                                disabled:
+                                  _vm.pagination.current ===
+                                  _vm.pagination.last,
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.getPosts(
+                                    _vm.pagination.current + 1
+                                  )
+                                },
+                              },
+                            },
+                            [_vm._v(" >> ")]
+                          ),
+                        ],
+                        2
+                      ),
+                    ],
+                    2
+                  )
+                : _c("div", [
+                    _vm._v("\r\n                Caricamento...\r\n        "),
+                  ]),
+            ])
           : _c("div", [
-              _vm._v("\r\n                Caricamento...\r\n        "),
+              _vm._v("\r\n            " + _vm._s(_vm.error) + "\r\n        "),
             ]),
         _vm._v(" "),
         _c("Sidebar", {

@@ -25,7 +25,7 @@
                 <input value="{{ old('title') }}" type="text" name="title" class="form-control @error('title') is-invalid
                 @enderror" id="title" placeholder="titolo">
                 @error('title')
-                   <p> {{ $message }} </p>
+                   <p class="para"> {{ $message }} </p>
                 @enderror
               </div>
               <div class="mb-3">
@@ -33,7 +33,7 @@
                 <textarea class="form-control @error('title') is-invalid
                 @enderror" name="content" id="content" rows="3">{{ old('content') }}</textarea>
                 @error('content')
-                <p> {{ $message }} </p>
+                <p class="para"> {{ $message }} </p>
                 @enderror
               </div>
               <div class="mb-3">

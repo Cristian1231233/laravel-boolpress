@@ -19,7 +19,8 @@ class PostsController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')->paginate(5);
         $categories = Category::all();
-        return view('admin.posts.index', compact('posts', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.index', compact('posts', 'categories', 'tags'));
     }
 
     /**
@@ -99,6 +100,7 @@ class PostsController extends Controller
         $categories = Category::all();
         $post = Post::find($id);
         $tags = Tag::all();
+        
         if($post){
             return view('admin.posts.edit', compact('post', 'categories', 'tags'));
         }
@@ -131,8 +133,12 @@ class PostsController extends Controller
         if($form_data['title'] != $post->title){
             $post['slug'] = Post::generateSlug($form_data['title']);
         }
-        
+    
         $post->update($form_data);
+
+        if(array_key_exists('tags', $form_data)){
+            $post->tags()->attach($form_data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post);
     }

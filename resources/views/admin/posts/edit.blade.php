@@ -47,18 +47,24 @@
                   </select>
              </div>
              <h2>Tag</h2>
-             @foreach ( $tags as $tag)
-             <span class="d-inline-block mr-3">
-               <input type="checkbox"
-                  name="tags[]"
-                  value="{{ $tag->id }}"
-                  id="tag{{ $loop->iteration }}"
-                  @if (in_array($tag->id, old('tags', []))) checked @endif
-                    >
-                  
-                 <label for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
-             </span>
-             @endforeach
+             @foreach ($tags as $tag)
+                  <span class="d-inline-block mr-3">
+                      <input type="checkbox"
+                          name="tags[]"
+                          value="{{ $tag->id }}"
+                          id="tag{{ $loop->iteration }}"
+                          {{-- al primo caricamento non ci sono errori quindi --}}
+                          {{-- stampo cheched se contengo l'id --}}
+                            @if(!$errors->any() && $post->tags->contains($tag->id))
+                                checked
+                            @elseif ($errors->any() && in_array($tag->id, old('tags', [])))
+                             {{-- viene stampato se ci sono errori quindi la regola è dtata dall'old --}}
+                                checked
+                            @endif
+                          >
+                      <label for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
+                  </span>
+                @endforeach
        
               <button class="btn btn-success" type="submit">Invia</button>
             </div>
